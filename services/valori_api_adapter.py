@@ -1,9 +1,12 @@
 import requests
 
 def run_simulation(payload: dict):
-    url = "https://api.valori.local/v1/run-simulation"  # ggf. anpassen
+    url = "https://valori-sim.onrender.com/v1/run-simulation"  # ← deine Ziel-URL hier eintragen
     try:
-        response = requests.post(url, json=payload)
+        response = requests.post(url, json=payload, timeout=10)
         return response.json()
     except Exception as e:
-        return {"error": str(e), "payload": payload}
+        return {
+            "error": str(e),
+            "payload": payload
+        }
