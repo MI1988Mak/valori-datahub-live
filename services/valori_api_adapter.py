@@ -1,8 +1,12 @@
+import requests
+
 def run_simulation(payload: dict):
-    kapital = payload["parameter"]["kapital"]
-    return {
-        "hinweis": "Lokale Demo-Simulation aktiv",
-        "etf_nach_steuer": round(kapital * 1.85, 2),
-        "immobilie_nach_steuer": round(kapital * 1.65, 2),
-        "entscheidung": "ETF bringt mehr – bei höherem Risiko"
-    }
+    url = "https://valori-sim.onrender.com/v1/run-simulation"  # VALORI-API hier eintragen
+    try:
+        response = requests.post(url, json=payload, timeout=10)
+        return response.json()
+    except Exception as e:
+        return {
+            "error": str(e),
+            "payload": payload
+        }
