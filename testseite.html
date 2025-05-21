@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>VALORI Simulation</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    input { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; }
+    pre { background: #f5f5f5; padding: 1rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h2>VALORI Simulation</h2>
+  <form id="simForm">
+    <label>Kapital (€): <input type="number" name="kapital" value="50000" required></label>
+    <label>Rendite ETF (%): <input type="number" name="rendite_etf" value="6.7" step="0.01" required></label>
+    <label>Rendite Immobilie (%): <input type="number" name="rendite_immobilie" value="3.0" step="0.01" required></label>
+    <label>Kostenquote ETF (%): <input type="number" name="kostenquote_etf" value="0.12" step="0.01" required></label>
+    <label>Kostenquote Immobilie (%): <input type="number" name="kostenquote_immobilie" value="1.0" step="0.01" required></label>
+    <label>Steuersatz (%): <input type="number" name="steuersatz" value="26.25" step="0.01" required></label>
+    <label>Laufzeit (Jahre): <input type="number" name="laufzeit_jahre" value="15" required></label>
+    <button type="submit">Simulation starten</button>
+  </form>
+
+  <pre id="output">Ergebnis erscheint hier…</pre>
+
+  <script>
+    document.getElementById("simForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      const payload = {
+        sim_id: "sim01",
+        parameter: {
+          kapital: parseFloat(data.kapital),
+          rendite_etf: parseFloat(data.rendite_etf) / 100,
+          rendite_immobilie: parseFloat(data.rendite_immobilie) / 100,
+          kostenquote_etf: parseFloat(data.kostenquote_etf) / 100,
+          kostenquote_immobilie: parseFloat(data.kostenquote_immobilie) / 100,
+          steuersatz: parseFloat(data.steuersatz) / 100,
+          laufzeit_jahre: parseInt(data.laufzeit_jahre)
+        }
+      };
+
+      const res = await fetch("https://valori-sim-api.onrender.com/v1/run-simulation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const text = await res.text();
+      try {
+        const json = JSON.parse(text);
+        document.getElementById("output").textContent = JSON.stringify(json, null, 2);
+      } catch {
+        document.getElementById("output").textContent = "Fehlerhafte Antwort:\n\n" + text;
+      }
+    });
+  </script>
+</body>
+</html>
