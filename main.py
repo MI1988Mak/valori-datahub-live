@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from data_router import router
-from datahub.livecheck_router import live_router  # <- Livecheck-Router importieren
+from datahub.livecheck_router import live_router      # Diagnose: Live-Werte prüfen
+from datahub.live_update_router import update_router  # Admin: Live-Werte setzen
 
 app = FastAPI(
     title="VALORI DataHub",
@@ -8,8 +9,11 @@ app = FastAPI(
     version="1.0"
 )
 
-# Hauptrouter mit sim01, sim06, sim12 usw.
+# Haupt-Router für sim01, sim06, sim12 usw.
 app.include_router(router)
 
-# Live-Daten-Diagnose-Endpunkt
+# Diagnose-Endpunkt: /valori/livecheck
 app.include_router(live_router)
+
+# Admin-Endpunkt: /valori/liveupdate?auth=valori123
+app.include_router(update_router)
