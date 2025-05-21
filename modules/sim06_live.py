@@ -5,7 +5,8 @@ def run_sim06_with_params(kapital: float, jahre: int) -> dict:
     rendite_etf = get_live_value("etf.msci_world.10y_return")
     steuer = get_live_value("steuern.abgeltungssatz")
 
-    realrendite = rendite_etf - inflation
+    # Prozentwerte korrekt skalieren
+    realrendite = (rendite_etf - inflation) / 100
     brutto = kapital * ((1 + realrendite) ** jahre)
     netto = brutto * (1 - steuer)
 
@@ -17,8 +18,8 @@ def run_sim06_with_params(kapital: float, jahre: int) -> dict:
             "jahre": jahre,
             "rendite_etf": rendite_etf,
             "inflation": inflation,
-            "realrendite": round(realrendite, 2)
+            "realrendite": round(realrendite * 100, 2)
         },
-        "ergebnis": f"ETF erzielt nach Steuern und Inflation ca. {round(netto, 2)} € Endwert.",
-        "revision": "Anpassung sinnvoll bei Inflation > 3 % oder verkürztem Anlagehorizont."
+        "ergebnis": f"ETF erzielt nach Steuern und Inflation ca. {round(netto, 2)} Euro Endwert.",
+        "revision": "Anpassung sinnvoll bei Inflation > 3 % oder verkürztem Anlagehorizont."
     }
