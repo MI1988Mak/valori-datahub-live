@@ -1,5 +1,16 @@
+# --- Kernsystem (API + Routing) ---
 fastapi
 uvicorn[standard]
-pydantic
-PyYAML>=6.0
-requests
+
+# --- Datenhandling & Strukturierung ---
+pydantic           # falls du Schemas wie SimPayload verwendest
+PyYAML>=6.0        # für valori_livedata.yaml, live_policy.yaml
+requests           # für externe Datenquellen (ETF, Immobilien)
+
+# --- Optional (Markdown, Uploads, Auth etc.) ---
+python-multipart   # falls du Uploads oder Formdaten brauchst
+markdown2          # wenn du REIZBAR als Markdown oder HTML ausgeben willst
+
+# --- Entwicklung & Test ---
+httpx              # für API-Tests (auch GPT-Schnittstellen)
+pytest             # Unit Tests für policymap, Simulationen etc.
