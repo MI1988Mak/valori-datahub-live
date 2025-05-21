@@ -10,6 +10,7 @@ def run_sim06_with_params(kapital: float, jahre: int) -> dict:
     netto = brutto * (1 - steuer)
 
     return {
+        "sim_id": "sim06",
         "auftragsklaerung": "Was bringt mehr Realertrag bei Inflation – ETF mit langer Laufzeit?",
         "beispiel": {
             "kapital": kapital,
@@ -18,6 +19,6 @@ def run_sim06_with_params(kapital: float, jahre: int) -> dict:
             "inflation": inflation,
             "realrendite": round(realrendite, 2)
         },
-        "ergebnis": f"Ergebnis nach Steuern: {round(netto, 2)} €",
-        "revision": "Anpassen bei Inflation >3 % oder kürzerem Horizont"
+        "ergebnis": f"ETF erzielt nach Steuern und Inflation ca. {round(netto, 2)} € Endwert.",
+        "revision": "Anpassung sinnvoll bei Inflation > 3 % oder verkürztem Anlagehorizont."
     }
