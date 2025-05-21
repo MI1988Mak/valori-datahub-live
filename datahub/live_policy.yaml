@@ -1,0 +1,21 @@
+inflation.germany.2025_q2:
+  warnwert: 3.5
+  effekte:
+    zielprofil.stabilität: '+1'
+    zielprofil.sicherheit: '+1'
+    zielprofil.freiheit: '-1'
+    sim01: 'Hinweis: Substanzwert bei Inflation prüfen'
+    sim03: Inflationsbereinigung aktivieren
+    sim06: Gold als psychologischer Schutz aktivieren
+    sim09: Realzinsverlust bei Rücklagen beachten
+etf.msci_world.10y_return:
+  warnwert: 5.0
+  effekte:
+    zielprofil.freiheit: '+1'
+    sim01: ETF erhält positiven Gewichtungsimpuls
+    sim05: Kapitalfreiheit realistischer erreichbar
+steuern.abgeltungssatz:
+  warnwert: 0.28
+  effekte:
+    sim01: Nachsteuer-Vergleich wichtiger machen
+    sim12: Weitergabe gegenüber Anlage bevorzugen
