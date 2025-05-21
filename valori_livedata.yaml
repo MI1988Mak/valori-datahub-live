@@ -1,0 +1,18 @@
+etf:
+  msci_world:
+    10y_return: 7.1
+    ter: 0.2
+  quelle: justETF
+  stand: '2025-05-20'
+inflation:
+  germany:
+    2025_q2: 2.5
+  quelle: Destatis
+  stand: '2025-05-20'
+steuern:
+  abgeltungssatz: 0.26375
+  quelle: BMF
+  schenkung:
+    kinder: 400000
+    partner: 500000
+  stand: '2025-01-01'
