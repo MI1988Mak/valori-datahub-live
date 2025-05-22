@@ -1,4 +1,3 @@
-
 from datahub.live_data_router import get_live_value
 
 def run_sim01_with_params(kapital: float, jahre: int) -> dict:
